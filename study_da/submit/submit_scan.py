@@ -178,7 +178,7 @@ class SubmitScan:
                 return
 
             # Configure the jobs (add generation and job keys, set status to "To finish")
-            dic_tree = ConfigJobs(dic_tree).find_and_configure_jobs(dic_config_jobs)
+            dic_tree = ConfigJobs(dic_tree,starting_depth=-len(self.path_tree.split('/'))+2).find_and_configure_jobs(dic_config_jobs)
 
             # Add the python environment, container image and absolute path of the study to the tree
             dic_tree["python_environment"] = self.path_python_environment
@@ -202,7 +202,7 @@ class SubmitScan:
         # Get a copy of the tree as it's safer
         with self.lock:
             dic_tree = self.dic_tree
-        return ConfigJobs(dic_tree).find_all_jobs()
+        return ConfigJobs(dic_tree,starting_depth=-len(self.path_tree.split('/'))+2).find_all_jobs()
 
     def generate_run_files(
         self,
@@ -258,6 +258,7 @@ class SubmitScan:
 
             # Build l_dependencies and add to the kwargs
             l_dependencies = dic_dependencies_per_gen.get(generation_number, [])
+            print('DEPENDENCIES',l_dependencies)
 
             # Get arguments of current generation
             dic_args = dic_copy_back_per_gen.get(generation_number, {})

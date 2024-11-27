@@ -37,7 +37,7 @@ class ConfigJobs:
         find_all_jobs(): Finds all jobs in the tree.
     """
 
-    def __init__(self, dic_tree: dict):
+    def __init__(self, dic_tree: dict,starting_depth: int = 0):
         """
         Initializes the ConfigJobs class.
 
@@ -52,6 +52,9 @@ class ConfigJobs:
 
         # Variables to store the jobs and their configuration
         self.dic_all_jobs: dict[str, Any] = {}
+
+        # Variable to adjust the depth of the tree 
+        self.starting_depth: int = starting_depth
 
     def _find_and_configure_jobs_recursion(
         self,
@@ -238,5 +241,5 @@ class ConfigJobs:
 
     def _log_and_find(self, log_str, find_only):
         logging.info(log_str)
-        self._find_and_configure_jobs_recursion(self.dic_tree, depth=-1, find_only=find_only)
+        self._find_and_configure_jobs_recursion(self.dic_tree, depth=self.starting_depth - 1, find_only=find_only)
         self.all_jobs_found = True
