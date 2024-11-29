@@ -258,7 +258,6 @@ class SubmitScan:
 
             # Build l_dependencies and add to the kwargs
             l_dependencies = dic_dependencies_per_gen.get(generation_number, [])
-            print('DEPENDENCIES',l_dependencies)
 
             # Get arguments of current generation
             dic_args = dic_copy_back_per_gen.get(generation_number, {})
