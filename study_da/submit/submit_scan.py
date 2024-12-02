@@ -9,6 +9,7 @@ import logging
 import os
 import time
 from typing import Any, Optional
+from pathlib import Path
 
 # Third party imports
 from filelock import SoftFileLock
@@ -178,7 +179,7 @@ class SubmitScan:
                 return
 
             # Configure the jobs (add generation and job keys, set status to "To finish")
-            dic_tree = ConfigJobs(dic_tree,starting_depth=-len(self.path_tree.split('/'))+2).find_and_configure_jobs(dic_config_jobs)
+            dic_tree = ConfigJobs(dic_tree,starting_depth=-len(Path(self.path_tree).parts) + 2).find_and_configure_jobs(dic_config_jobs)
 
             # Add the python environment, container image and absolute path of the study to the tree
             dic_tree["python_environment"] = self.path_python_environment
@@ -202,7 +203,7 @@ class SubmitScan:
         # Get a copy of the tree as it's safer
         with self.lock:
             dic_tree = self.dic_tree
-        return ConfigJobs(dic_tree,starting_depth=-len(self.path_tree.split('/'))+2).find_all_jobs()
+        return ConfigJobs(dic_tree,starting_depth=-len(Path(self.path_tree).parts) + 2).find_all_jobs()
 
     def generate_run_files(
         self,

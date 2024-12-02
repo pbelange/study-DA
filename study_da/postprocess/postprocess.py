@@ -21,6 +21,7 @@ import inspect
 import logging
 import os
 from typing import Any, Callable, Dict, List, Optional
+from pathlib import Path
 
 # Third party imports
 import numpy as np
@@ -225,7 +226,7 @@ def aggregate_output_data(
 
     logging.info("Analysis of output simulation files started")
 
-    dic_all_jobs = ConfigJobs(dic_tree).find_all_jobs()
+    dic_all_jobs = ConfigJobs(dic_tree,starting_depth=-len(Path(path_tree).parts) + 2).find_all_jobs()
 
     l_df_sim = get_particles_data(
         dic_all_jobs, absolute_path_study, generation_of_interest, name_output
