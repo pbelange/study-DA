@@ -551,7 +551,7 @@ class BBCWInstaller:
 
         # Link all tanks to common knob
         for beam_name in beam_list:
-            for loc  in loc_list:
+            for loc in loc_list[beam_name]:
 
                 # Define master knobs
                 collider.vars[f'i_wire.{loc}.{beam_name}']      = 0
@@ -570,7 +570,7 @@ class BBCWInstaller:
             # Twiss for c.o. values
             _line   = collider[f'lhc{beam_name}']
             _twiss0 = _line.twiss4d()
-            for loc  in loc_list:
+            for loc in loc_list[beam_name]:
 
                 _i = config_bbcw[f'i_bbcw_{loc}_{beam_name}']
                 _d = config_bbcw[f'd_bbcw_{loc}_{beam_name}']

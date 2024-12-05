@@ -20,6 +20,7 @@ __all__ = [
     "XsuiteTracking",
     "ParticlesDistribution",
     "XsuiteCollider",
+    "BBCWInstaller",
     "load_dic_from_path",
     "write_dic_to_path",
     "find_item_in_dic",
