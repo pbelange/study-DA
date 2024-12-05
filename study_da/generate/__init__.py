@@ -13,6 +13,7 @@ from .master_classes.mad_collider import MadCollider
 from .master_classes.particles_distribution import ParticlesDistribution
 from .master_classes.xsuite_collider import XsuiteCollider
 from .master_classes.xsuite_tracking import XsuiteTracking
+from .master_classes.xsuite_bbcw import BBCWInstaller
 
 __all__ = [
     "MadCollider",
